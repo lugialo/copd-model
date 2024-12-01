@@ -10,7 +10,8 @@ CORS(app)
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
-    features = data['features']
+    features_dict = data['features']
+    features = [float(value) for value in features_dict.values()]
     prediction = model.predict([features])
     return jsonify({'prediction': int(prediction[0])})
 
